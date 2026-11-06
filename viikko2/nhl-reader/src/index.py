@@ -23,7 +23,7 @@ class PlayerReader:
         try:
             self.response = requests.get(url, timeout=10).json()
         except requests.exceptions.Timeout:
-            print("Wroong url")
+            print("Wrong url")
 
 class PlayerStats():
     def __init__(self, reader):
@@ -38,6 +38,22 @@ class PlayerStats():
 
         players.sort(key=lambda player: player.points, reverse=True)
         return players
+
+    def top_scorers_by_team(self, team):
+        players = []
+
+        for player in self.reader.players:
+            if player.team == team:
+                players.append(player)
+
+        players.sort(key=lambda player: player.points, reverse=True)
+        return players
+
+    def top_goal_scorers(self, how_many):
+        """Palauttaa how_many eniten maaleja tehnyttä pelaajaa maalimäärän mukaan laskevassa järjestyksessä"""
+        players = sorted(self.reader.players, key=lambda player: player.goals, reverse=True)
+        return players[:how_many]
+
 
 
 
