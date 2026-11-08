@@ -9,8 +9,8 @@ logger("aloitetaan ohjelma")
 x = int(input("Luku 1: "))
 y = int(input("Luku 2: "))
 
-print(f"Lukujen {x} ja {y} summa on {summa(x, y)}") # muutos bugikorjaus-branchissa
-print(f"Lukujen {x} ja {y} erotus on {erotus(x, y)}") # muutos bugikorjaus-branchissa
+print(f"Lukujen {x} ja {y} summa on {summa(x, y)}")
+print(f"Lukujen {x} ja {y} erotus on {erotus(x, y)}")
 
 logger("lopetetaan ohjelma")
 print("goodbye!")
