@@ -26,3 +26,6 @@ print(f"Lukujen {x} ja {y} erotus on {erotus(x, y)}") # muutos mainissa
 
 logger("lopetetaan ohjelma")
 print("goodbye!")
+
+#muutos 
+print("see you")
