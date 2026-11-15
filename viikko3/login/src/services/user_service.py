@@ -47,6 +47,10 @@ class UserService:
             raise AuthenticationError("Username is already in use")
         if len(password) < 8:
             raise UserInputError("Password should be atleast 8 symbols long")
+        if password.isalpha():
+            raise UserInputError("Password cannot consist only of letters")
+        if password != password_confirmation:
+            raise UserInputError("Password confirmation does not match")
 
 
 user_service = UserService()
