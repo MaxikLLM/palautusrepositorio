@@ -33,6 +33,7 @@ class Ostoskori:
                     self._ostokset.remove(ostos)
                 break
 
+    # change 3
     def tyhjenna(self):
         self._tavaroita = 0
         self._hinta = 0
