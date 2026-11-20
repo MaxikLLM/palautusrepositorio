@@ -13,9 +13,9 @@ class Ostoskori:
         return self._hinta
 
     def lisaa_tuote(self, lisattava: Tuote):
+        self._tavaroita += 1
         if lisattava.nimi() not in self._tuotteiden_nimet:
             self._tuotteiden_nimet.add(lisattava.nimi())
-            self._tavaroita = len(self._tuotteiden_nimet)
             self._hinta += lisattava.hinta()
 
     def poista_tuote(self, poistettava: Tuote):
