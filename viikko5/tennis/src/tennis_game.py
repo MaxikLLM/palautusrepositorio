@@ -2,54 +2,56 @@ class TennisGame:
     def __init__(self, player1_name, player2_name):
         self.player1_name = player1_name
         self.player2_name = player2_name
-        self.m_score1 = 0
-        self.m_score2 = 0
+        self.player1_score = 0
+        self.player2_score = 0
+        self.score = ""
 
     def won_point(self, player_name):
-        if player_name == "player1":
-            self.m_score1 = self.m_score1 + 1
+        if player_name == self.player1_name:
+            self.player1_score += 1
         else:
-            self.m_score2 = self.m_score2 + 1
+            self.player2_score += 1
+
+    def score_convert(self, points):
+        if points == 0:
+            return "Love"
+        if points == 1:
+            return "Fifteen"
+        if points == 2:
+            return "Thirty"
+        return "Forty"
+
+    def game_situation(self, score_diff):
+        if score_diff == 1:
+            return f"Advantage {self.player1_name}"
+        if score_diff == -1:
+            return f"Advantage {self.player2_name}"
+        if score_diff >= 2:
+            return f"Win for {self.player1_name}"
+        return f"Win for {self.player2_name}"
+
+    def draw_situation(self, score):
+        if score < 3:
+            return f"{self.score_convert(score)}-All"
+        else:
+            return "Deuce"
 
     def get_score(self):
-        score = ""
-        temp_score = 0
+        draw = self.player1_score == self.player2_score
+        atleast_4_points = self.player1_score >= 4 or self.player2_score >= 4
 
-        if self.m_score1 == self.m_score2:
-            if self.m_score1 == 0:
-                score = "Love-All"
-            elif self.m_score1 == 1:
-                score = "Fifteen-All"
-            elif self.m_score1 == 2:
-                score = "Thirty-All"
-            else:
-                score = "Deuce"
-        elif self.m_score1 >= 4 or self.m_score2 >= 4:
-            minus_result = self.m_score1 - self. m_score2
+        if draw:
+            draw_score = self.draw_situation(self.player1_score)
 
-            if minus_result == 1:
-                score = "Advantage player1"
-            elif minus_result == -1:
-                score = "Advantage player2"
-            elif minus_result >= 2:
-                score = "Win for player1"
-            else:
-                score = "Win for player2"
+            return draw_score
+
+        elif atleast_4_points:
+            score_diff = self.player1_score - self.player2_score
+            game_situation = self.game_situation(score_diff)
+
+            return game_situation
+        
         else:
-            for i in range(1, 3):
-                if i == 1:
-                    temp_score = self.m_score1
-                else:
-                    score = score + "-"
-                    temp_score = self.m_score2
+            current_score = f"{self.score_convert(self.player1_score)}-{self.score_convert(self.player2_score)}"
 
-                if temp_score == 0:
-                    score = score + "Love"
-                elif temp_score == 1:
-                    score = score + "Fifteen"
-                elif temp_score == 2:
-                    score = score + "Thirty"
-                elif temp_score == 3:
-                    score = score + "Forty"
-
-        return score
+            return current_score
